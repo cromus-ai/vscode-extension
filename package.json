@@ -1,0 +1,117 @@
+{
+  "name": "cromus",
+  "displayName": "Cromus AI Skills Governance",
+  "description": "Score, validate, and govern AI skills (SKILL.md, ETHOS.md, AGENTS.md, MEMORY.md) directly in VS Code. Shows CROMS score in the status bar, inline diagnostics on save, model pricing on hover, and quick-fix suggestions.",
+  "version": "1.0.0",
+  "publisher": "cromus-ai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cromus-ai/vscode-extension"
+  },
+  "homepage": "https://cromus.ai/connect",
+  "bugs": {
+    "url": "https://cromus.ai/contact"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "AI",
+    "skills",
+    "SKILL.md",
+    "ETHOS.md",
+    "governance",
+    "CROMS",
+    "agent",
+    "MCP",
+    "cromus"
+  ],
+  "activationEvents": [
+    "onLanguage:yaml",
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Cromus",
+      "properties": {
+        "cromus.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Cromus API key (begins with cromus_ci_ or mcp_). Get one at cromus.ai/connect → API Keys.",
+          "markdownDescription": "Your Cromus API key (`cromus_ci_...` or `mcp_...`). Get one at [cromus.ai/connect](https://cromus.ai/connect) → API Keys."
+        },
+        "cromus.apiUrl": {
+          "type": "string",
+          "default": "https://cromus.ai",
+          "description": "Cromus API base URL. Override only when using a self-hosted instance."
+        },
+        "cromus.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate SKILL.md, ETHOS.md, AGENTS.md, and MEMORY.md files automatically on save."
+        },
+        "cromus.showScoreInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the CROMS score in the VS Code status bar when a SKILL.md is open."
+        },
+        "cromus.policyFile": {
+          "type": "string",
+          "default": "cromus.policy.yml",
+          "description": "Path (relative to workspace root) of the policy file to enforce on SKILL.md files."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cromus.scoreCurrentFile",
+        "title": "Cromus: Score Current SKILL.md",
+        "category": "Cromus"
+      },
+      {
+        "command": "cromus.validateCurrentFile",
+        "title": "Cromus: Validate Current File",
+        "category": "Cromus"
+      },
+      {
+        "command": "cromus.openConnect",
+        "title": "Cromus: Open Connect Page",
+        "category": "Cromus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "cromus.scoreCurrentFile",
+          "when": "resourceFilename == SKILL.md",
+          "group": "cromus"
+        },
+        {
+          "command": "cromus.validateCurrentFile",
+          "when": "resourceFilename =~ /^(SKILL|ETHOS|AGENTS|MEMORY)\\.md$/",
+          "group": "cromus"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.3.3"
+  }
+}
