@@ -3,7 +3,7 @@
   "displayName": "Cromus AI Skills Governance",
   "description": "Score, validate, and govern AI skills (SKILL.md, ETHOS.md, AGENTS.md, MEMORY.md) directly in VS Code. Shows CROMS score in the status bar, inline diagnostics on save, model pricing on hover, and quick-fix suggestions.",
   "version": "1.0.0",
-  "publisher": "cromus-ai",
+  "publisher": "CromusAI",
   "license": "MIT",
   "repository": {
     "type": "git",
